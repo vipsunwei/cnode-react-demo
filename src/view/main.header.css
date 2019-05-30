@@ -1,0 +1,39 @@
+
+.logo {
+  animation: App-logo-spin infinite 20s linear;
+  pointer-events: none;
+  color: #fff;
+  text-align: center;
+}
+.headerDivider {
+  height: 44px;
+  margin: 10px 0;
+  float: left;
+}
+.navMenu {
+  background: none;
+  border-bottom: none;
+  line-height: 62px;
+}
+.xsNavMenu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+.navMenu .ant-menu-item a {
+  color: #fff;
+}
+.navMenu .ant-menu-item-selected a {
+  color: #1890ff;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

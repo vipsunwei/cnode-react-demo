@@ -1,0 +1,13 @@
+.mainWrap {
+  border: 1px solid #ccc;
+  border-top: none;
+  text-align: center;
+}
+.mainWrap .ant-menu-item:hover,
+.mainWrap .ant-menu-item-selected {
+  background: #e6f7ff;
+}
+.indexMenu .ant-menu-item:hover,
+.indexMenu .ant-menu-item-selected {
+  border-right: 2px solid #1890ff;
+}
