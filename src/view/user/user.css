@@ -1,0 +1,10 @@
+.userAvatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 10px auto;
+}
+.userInfo {
+  text-align: center;
+  padding-bottom: 10px;
+}

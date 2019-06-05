@@ -23,7 +23,7 @@ class IndexMenu extends Component {
           <Link to="/index/job">招聘</Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/index/test">测试</Link>
+          <Link to="/index/dev">测试</Link>
         </Menu.Item>
       </Menu>
     )
