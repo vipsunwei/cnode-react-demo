@@ -5,7 +5,6 @@ import { Menu, Icon } from 'antd'
 class Nav extends Component {
   render () {
     let { mode, className } = this.props
-    console.log(className, mode)
     return (
       <Menu mode={ mode } theme="light" className={ className }>
         <Menu.Item>

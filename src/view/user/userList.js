@@ -21,6 +21,7 @@ class UserList extends Component {
               <List.Item.Meta
                 avatar={ <Avatar src={ item.author.avatar_url } /> }
                 title={ <Link to={'/details/' + item.id}>{ item.title }</Link> }
+                description={ <Link to={ '/user/' + item.author.loginname }>{ item.author.loginname }</Link> }
               />
             </List.Item>
           )}

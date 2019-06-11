@@ -2,15 +2,62 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { List, Skeleton, Avatar } from 'antd'
 import TxtTag from './../txtTag'
+import { connect } from 'react-redux'
+import { fetchGet } from './../../tool/fetch'
+import { baseUrl, topics } from './../../api'
 
 class IndexList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      page: 1
+    }
+    this.getData(this.props.tab)
+  }
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.tab !== this.props.tab) {
+      this.getData(nextProps.tab)
+      return false
+    }
+    return true
+  }
+  getData (tab) {
+    console.log(tab)
+    let params = {
+      page: this.state.page,
+      tab,
+      limit: 10,
+      mdrender: false
+    }
+    let url = baseUrl + topics
+    this.props.dispatch(dispatch => {
+      fetchGet(url, params).then(response => response.json()).then(result => {
+        console.log(result)
+        result.success && dispatch({
+          type: 'UPDATE_LIST_SUCCESS',
+          data: {
+            data: result.data,
+            loading: false
+          }
+        })
+      }).catch(error => {
+        console.warn(error)
+        dispatch({
+          type: 'UPDATE_LIST_ERROR',
+          data: {
+            data: [],
+            loading: false
+          }
+        })
+      })
+    })
+  }
   render () {
     let { data, loading } = this.props
-    console.log(this.props)
     return (
       <List
         loading={loading}
-        dataSource={data.data}
+        dataSource={data}
         renderItem={item => (
           <List.Item
             actions={[
@@ -44,4 +91,4 @@ class IndexList extends Component {
   }
 }
 
-export default IndexList
+export default connect(state => state.list)(IndexList)

@@ -1,51 +1,81 @@
 import React, { Component } from 'react'
-import { Avatar, Row, Col, List } from 'antd';
+import { Avatar, Row, Col } from 'antd';
+import { connect } from 'react-redux'
 import UserList from './userList';
-import data from './data'
+import { fetchGet } from './../../tool/fetch'
+import { baseUrl, user } from './../../api'
 import './user.css'
 
 class User extends Component {
-  constructor () {
-    super()
-    this.state = {
-      data: {},
-      loading: true
-    }
-    this.getData(1000)
+  constructor (props) {
+    super(props)
+    this.getData(this.props.match.params.id)
   }
-  getData (t) {
-    setTimeout(() => {
-      this.setState({ loading: false, data: data })
-    }, t)
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.getData(nextProps.match.params.id)
+      return false
+    }
+    return true
+  }
+  getData (id) {
+    this.props.dispatch(dispatch => {
+      dispatch({
+        type: 'UPDATE_USER',
+        data: {
+          loading: true,
+          data: {}
+        }
+      })
+      let url = baseUrl + user + '/' + id
+      fetchGet(url).then(response => response.json()).then(result => {
+        result.success && dispatch({
+          type: 'UPDATE_USER_SUCCESS',
+          data: {
+            loading: false,
+            data: result.data
+          }
+        })
+      }).catch(error => {
+        console.warn(error)
+        dispatch({
+          type: 'UPDATE_USER_ERROR',
+          data: {
+            loading: false,
+            data: {}
+          }
+        })
+      })
+    })
   }
   render () {
-    console.log(data)
-    return !this.state.loading ? (
+    let { loading, data } = this.props
+    return (
       <div className='mainWrap'>
-        <Avatar src={data.data.avatar_url} className='userAvatar' />
+        <Avatar src={data.avatar_url} className='userAvatar' />
         <Row className='userInfo'>
           <Col md={8}>
-            用户名:<a>{ this.state.data.data.loginname }</a>
+            用户名:<span className="userInfoItem">{ data.loginname }</span>
           </Col>
           <Col md={8}>
-            积分:<a>{ this.state.data.data.score }</a>
+            积分:<span className="userInfoItem">{ data.score }</span>
           </Col>
           <Col md={8}>
-            注册时间:<a>{ this.state.data.data.create_at.split('T')[0] }</a>
+            注册时间:<span className="userInfoItem">{ data.create_at && data.create_at.split('T')[0] }</span>
           </Col>
         </Row>
         <UserList
           title='最近创建的话题'
-          loading={ this.state.loading }
-          data={ this.state.data.data.recent_topics }
+          loading={ loading }
+          data={ data.recent_topics }
         />
         <UserList
           title='最近回复的话题'
-          loading={ this.state.loading }
-          data={ this.state.data.data.recent_replies }
+          loading={ loading }
+          data={ data.recent_replies }
         />
       </div>
-    ) : (<List loading={ this.state.loading }></List>)
+    )
   }
 }
-export default User
+export default connect(state => state.user)(User)
