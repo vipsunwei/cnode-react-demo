@@ -1,30 +1,67 @@
 import React, { Component } from 'react'
-import { List } from 'antd'
+import { connect } from 'react-redux'
+import { fetchGet } from './../../tool/fetch'
+import { baseUrl, topic } from './../../api'
 import TxtDetails from './txtDetails'
-import ReplyList from './replyList';
-import data from './data'
+import ReplyList from './replyList'
 
 class Details extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       loading: true,
       data: {}
     }
-    this.getData(1000)
+    let id = this.props.match.params.id
+    this.getData(id)
   }
-  getData (t) {
-    setTimeout(() => {
-      this.setState({ loading: false, data: data })
-    }, t)
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      console.log(nextProps.match.params.id, this.props.match.params.id)
+      this.getData(nextProps.match.params.id)
+      return false
+    }
+    return true
+  }
+  getData (id) {
+    this.props.dispatch(dispatch => {
+      dispatch({
+        type: 'UPDATE_DETAILS',
+        data: {
+          loading: true
+        }
+      })
+      let url = baseUrl + topic + '/' + id
+      let params = {
+        mdrender: false
+      }
+      fetchGet(url, params).then(response => response.json()).then(result => {
+        result.success && dispatch({
+          type: 'UPDATE_DETAILS_SUCCESS',
+          data: {
+            loading: false,
+            data: result.data
+          }
+        })
+      }).catch(error => {
+        console.warn(error)
+        dispatch({
+          type: 'UPDATE_DETAILS_ERROR',
+          data: {
+            loading: false
+          }
+        })
+      })
+    })
   }
   render () {
-    return !this.state.loading ? (
+    let { loading, data } = this.props
+    return (
       <div className="mainWrap">
-        <TxtDetails data={ this.state.data } />
-        <ReplyList replyCount={ this.state.data.data.reply_count } replies={ this.state.data.data.replies } />
+        <TxtDetails loading={ loading } data={ data } />
+        <ReplyList loading={ loading } replyCount={ data.reply_count } replies={ data.replies } />
       </div>
-    ) : (<List loading={ this.state.loading }></List>)
+    )
   }
 }
-export default Details
+export default connect(state => state.details)(Details)

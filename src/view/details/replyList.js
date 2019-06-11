@@ -4,10 +4,10 @@ import { List, Card, Avatar } from 'antd';
 
 class ReplyList extends Component {
   render () {
-    let { replies, replyCount } = this.props
-    console.log(this.props)
+    let { loading, replies, replyCount } = this.props
+    let title = !replyCount || loading ? '' : `${replyCount}条回复`
     return (
-      <Card title={ replyCount + '条回复' } type='inner'>
+      <Card loading={ loading } title={ title } type='inner'>
         <List
           itemLayout='vertical'
           dataSource={ replies }
@@ -20,9 +20,9 @@ class ReplyList extends Component {
                 avatar={ <Avatar src={ item.author.avatar_url } /> }
                 description={
                   <div>
-                    <Link to={'/user/' + item.author.loginname}>
+                    <Link to={ '/user/' + item.author.loginname }>
                       { item.author.loginname }
-                    </Link>发表于:{item.create_at.split('T')[0]}
+                    </Link>发表于:{ item.create_at.split('T')[0] }
                   </div>
                 }
               />

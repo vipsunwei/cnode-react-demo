@@ -31,8 +31,13 @@ class IndexList extends Component {
     }
     let url = baseUrl + topics
     this.props.dispatch(dispatch => {
+      dispatch({
+        type: 'UPDATE_LIST',
+        data: {
+          loading: true
+        }
+      })
       fetchGet(url, params).then(response => response.json()).then(result => {
-        console.log(result)
         result.success && dispatch({
           type: 'UPDATE_LIST_SUCCESS',
           data: {
@@ -45,7 +50,6 @@ class IndexList extends Component {
         dispatch({
           type: 'UPDATE_LIST_ERROR',
           data: {
-            data: [],
             loading: false
           }
         })

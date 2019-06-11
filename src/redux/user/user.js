@@ -4,7 +4,7 @@ function user (state = defaultState, action) {
     case 'UPDATE_USER':
       return {
         loading: action.data.loading,
-        data: action.data.data
+        data: state.data
       }
     case 'UPDATE_USER_SUCCESS':
       return {
@@ -14,7 +14,7 @@ function user (state = defaultState, action) {
     case 'UPDATE_USER_ERROR':
       return {
         loading: action.data.loading,
-        data: action.data.data
+        data: defaultState.data
       }
     default:
       return state

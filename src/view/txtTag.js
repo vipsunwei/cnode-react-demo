@@ -33,9 +33,9 @@ function getTab (data) {
 }
 class TxtTag extends Component {
   render () {
-    let { color, txt } = tab[ getTab(this.props.data) ]
+    let { color = '', txt = '' } = tab[ getTab(this.props.data) ] || {}
     return (
-      <Tag color={color}>{txt}</Tag>
+      <Tag color={ color }>{ txt }</Tag>
     )
   }
 }

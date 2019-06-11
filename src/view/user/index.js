@@ -13,6 +13,7 @@ class User extends Component {
   }
   shouldComponentUpdate (nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {
+      console.log(nextProps.match.params.id, this.props.match.params.id)
       this.getData(nextProps.match.params.id)
       return false
     }
@@ -23,8 +24,7 @@ class User extends Component {
       dispatch({
         type: 'UPDATE_USER',
         data: {
-          loading: true,
-          data: {}
+          loading: true
         }
       })
       let url = baseUrl + user + '/' + id
@@ -41,8 +41,7 @@ class User extends Component {
         dispatch({
           type: 'UPDATE_USER_ERROR',
           data: {
-            loading: false,
-            data: {}
+            loading: false
           }
         })
       })
