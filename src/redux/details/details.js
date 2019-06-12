@@ -3,18 +3,17 @@ function details (state = defaultState, action) {
   switch (action.type) {
     case 'UPDATE_DETAILS':
       return {
-        loading: action.data.loading,
+        loading: action.payload.loading,
         data: state.data
       }
     case 'UPDATE_DETAILS_SUCCESS':
       return {
-        loading: action.data.loading,
-        data: action.data.data
+        loading: action.payload.loading,
+        data: action.payload.data
       }
     case 'UPDATE_DETAILS_ERROR':
-      console.log('default state: ', defaultState)
       return {
-        loading: action.data.loading,
+        loading: action.payload.loading,
         data: defaultState.data
       }
     default:

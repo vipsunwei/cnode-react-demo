@@ -14,7 +14,7 @@ class MainHeader extends Component {
             <Nav mode="horizontal" className="navMenu" />
           </Col>
           <Col md={0} xs={24} className="xsNavMenu">
-            <Dropdown overlay={ <Nav mode="vertical" className="" /> } trigger={ ['hover', 'touchend'] } placement="bottomRight" >
+            <Dropdown overlay={ <Nav mode="vertical" className="xsNavMenu" /> } trigger={ ['hover', 'touchend'] } placement="bottomRight" >
               <Button><Icon type="bars" /></Button>
             </Dropdown>
           </Col>

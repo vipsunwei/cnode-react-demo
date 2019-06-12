@@ -13,7 +13,7 @@ class Index extends Component {
           <IndexMenu mode="vertical" className="indexMenu" />
         </Col>
         <Col md={0} xs={24}>
-          <IndexMenu mode="horizontal" />
+          <IndexMenu mode="horizontal" className="indexXsMenu" />
         </Col>
         <Col md={18} className="indexList">
           <IndexList

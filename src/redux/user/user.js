@@ -3,17 +3,17 @@ function user (state = defaultState, action) {
   switch (action.type) {
     case 'UPDATE_USER':
       return {
-        loading: action.data.loading,
+        loading: action.payload.loading,
         data: state.data
       }
     case 'UPDATE_USER_SUCCESS':
       return {
-        loading: action.data.loading,
-        data: action.data.data
+        loading: action.payload.loading,
+        data: action.payload.data
       }
     case 'UPDATE_USER_ERROR':
       return {
-        loading: action.data.loading,
+        loading: action.payload.loading,
         data: defaultState.data
       }
     default:

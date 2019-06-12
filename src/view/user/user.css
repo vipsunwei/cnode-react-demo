@@ -11,3 +11,13 @@
 .userInfoItem {
   color: #1890ff;
 }
+.ant-list-item-meta-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.userInfoLastReply {
+  padding-left: 48px;
+}
+.ant-card-body {
+  min-width: 250px;
+}

@@ -4,14 +4,11 @@ import { fetchGet } from './../../tool/fetch'
 import { baseUrl, topic } from './../../api'
 import TxtDetails from './txtDetails'
 import ReplyList from './replyList'
+import './details.css'
 
 class Details extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      loading: true,
-      data: {}
-    }
     let id = this.props.match.params.id
     this.getData(id)
   }
@@ -27,7 +24,7 @@ class Details extends Component {
     this.props.dispatch(dispatch => {
       dispatch({
         type: 'UPDATE_DETAILS',
-        data: {
+        payload: {
           loading: true
         }
       })
@@ -38,7 +35,7 @@ class Details extends Component {
       fetchGet(url, params).then(response => response.json()).then(result => {
         result.success && dispatch({
           type: 'UPDATE_DETAILS_SUCCESS',
-          data: {
+          payload: {
             loading: false,
             data: result.data
           }
@@ -47,7 +44,7 @@ class Details extends Component {
         console.warn(error)
         dispatch({
           type: 'UPDATE_DETAILS_ERROR',
-          data: {
+          payload: {
             loading: false
           }
         })

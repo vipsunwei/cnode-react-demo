@@ -3,12 +3,29 @@ import { Link } from 'react-router-dom'
 import { List, Card, Avatar } from 'antd';
 
 class ReplyList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      current: 1
+    }
+  }
   render () {
     let { loading, replies, replyCount } = this.props
     let title = !replyCount || loading ? '' : `${replyCount}条回复`
+    let pagination = {
+      defaultCurrent: 1,
+      current: this.state.current,
+      pageSize: 3,
+      onChange: current => this.setState({ current }),
+      total: replies.length,
+      hideOnSinglePage: true,
+      size: 'small',
+      showLessItems: true
+    }
     return (
       <Card loading={ loading } title={ title } type='inner'>
         <List
+          pagination={ pagination }
           itemLayout='vertical'
           dataSource={ replies }
           renderItem={item => (

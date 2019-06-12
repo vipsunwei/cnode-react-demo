@@ -23,7 +23,7 @@ class User extends Component {
     this.props.dispatch(dispatch => {
       dispatch({
         type: 'UPDATE_USER',
-        data: {
+        payload: {
           loading: true
         }
       })
@@ -31,7 +31,7 @@ class User extends Component {
       fetchGet(url).then(response => response.json()).then(result => {
         result.success && dispatch({
           type: 'UPDATE_USER_SUCCESS',
-          data: {
+          payload: {
             loading: false,
             data: result.data
           }
@@ -40,7 +40,7 @@ class User extends Component {
         console.warn(error)
         dispatch({
           type: 'UPDATE_USER_ERROR',
-          data: {
+          payload: {
             loading: false
           }
         })

@@ -8,6 +8,9 @@
 .mainWrap img {
   max-width: 100%;
 }
+.mainWrap .ant-col-xs-24 {
+  float: none;
+}
 .mainWrap .ant-list-items {
   display: flex;
   width: 100%;
@@ -15,7 +18,14 @@
 }
 .mainWrap .ant-list-item-meta {
   align-items: center;
-  min-width: 220px;
+  min-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mainWrap .ant-list-item-meta .ant-list-item-meta-content {
+  white-space: nowrap;
+  overflow: hidden;
 }
 .mainWrap .ant-menu-item:hover,
 .mainWrap .ant-menu-item-selected {
@@ -32,4 +42,10 @@
 }
 .indexList {
   padding: 0 10px;
+}
+.indexList .ant-list-item-action {
+  margin-left: 48px;
+}
+.ant-menu-vertical .ant-menu-item-active:hover {
+  background: #e6f7ff;
 }

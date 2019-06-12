@@ -1,0 +1,7 @@
+.mainWrap .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mainWrap .content {
+  
+}

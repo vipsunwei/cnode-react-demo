@@ -21,13 +21,15 @@
   top: 0;
   width: auto;
 }
+.xsNavMenu .ant-menu-item-active:hover {
+  background: #e6f7ff;
+}
 .navMenu .ant-menu-item a {
   color: #fff;
 }
 .navMenu .ant-menu-item-selected a {
   color: #1890ff;
 }
-
 
 @keyframes App-logo-spin {
   from {

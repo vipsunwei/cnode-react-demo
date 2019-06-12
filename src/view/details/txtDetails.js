@@ -9,7 +9,7 @@ class TxtDetails extends Component {
     const title = (
       !loading ? (
         <div>
-          <h1>{ data.title }</h1>
+          <h1 className="title" title={ data.title }>{ data.title }</h1>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <TxtTag data={ data } />
             <Link to={ '/user/' + data.author.loginname }>
@@ -24,7 +24,7 @@ class TxtDetails extends Component {
     )
     return (
       <Card loading={ loading } title={ title } type='inner'>
-        <div dangerouslySetInnerHTML={{ __html: data && data.content }}></div>
+        <div className="content" dangerouslySetInnerHTML={{ __html: data && data.content }}></div>
       </Card>
     )
   }
