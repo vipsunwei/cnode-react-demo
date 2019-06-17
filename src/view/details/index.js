@@ -30,7 +30,7 @@ class Details extends Component {
       })
       let url = baseUrl + topic + '/' + id
       let params = {
-        mdrender: false
+        mdrender: true
       }
       fetchGet(url, params).then(response => response.json()).then(result => {
         result.success && dispatch({

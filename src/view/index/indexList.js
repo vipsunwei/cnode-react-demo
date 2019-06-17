@@ -28,7 +28,7 @@ class IndexList extends Component {
     let params = {
       page: this.state.page,
       tab,
-      mdrender: false
+      mdrender: true
     }
     let url = baseUrl + topics
     this.props.dispatch(dispatch => {

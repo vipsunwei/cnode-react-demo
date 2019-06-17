@@ -24,7 +24,7 @@ class TxtDetails extends Component {
     )
     return (
       <Card loading={ loading } title={ title } type='inner'>
-        <div className="content" dangerouslySetInnerHTML={{ __html: data && data.content }}></div>
+        <div dangerouslySetInnerHTML={{ __html: data && data.content }}></div>
       </Card>
     )
   }
