@@ -1,6 +1,11 @@
 {
   "name": "cnode",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vipsunwei/cnode-react-demo"
+  },
+  "homepage": "https://github.com/vipsunwei/cnode-react-demo",
   "private": true,
   "sideEffects": [
     "*.css"
