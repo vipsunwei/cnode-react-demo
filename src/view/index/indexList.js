@@ -4,6 +4,7 @@ import { List, Skeleton, Avatar } from 'antd'
 import TxtTag from './../txtTag'
 import { connect } from 'react-redux'
 import { fetchGet } from './../../tool/fetch'
+import { compareFn } from './../../tool/sort'
 import { baseUrl, topics } from './../../api'
 
 class IndexList extends Component {
@@ -26,7 +27,6 @@ class IndexList extends Component {
   }
   getData (tab) {
     let params = {
-      page: this.state.page,
       tab,
       mdrender: true
     }
@@ -42,7 +42,7 @@ class IndexList extends Component {
         result.success && dispatch({
           type: 'UPDATE_LIST_SUCCESS',
           payload: {
-            data: result.data,
+            data: result.data.sort(compareFn({ priority: 'top', propertyName: 'create_at' })),
             loading: false
           }
         })
