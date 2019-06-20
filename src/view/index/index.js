@@ -9,13 +9,13 @@ class Index extends Component {
     let tab = this.props.match.params.id
     return (
       <Row className="mainWrap">
-        <Col md={6} xs={0}>
+        <Col md={4} xs={0}>
           <IndexMenu mode="vertical" className="indexMenu" />
         </Col>
         <Col md={0} xs={24}>
           <IndexMenu mode="horizontal" className="indexXsMenu" />
         </Col>
-        <Col md={18} className="indexList">
+        <Col md={20} className="indexList">
           <IndexList
             loading={ this.props.loading }
             tab={ tab }

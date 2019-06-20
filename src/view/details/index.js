@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchGet } from './../../tool/fetch'
 import { baseUrl, topic } from './../../api'
+import { compareFn } from './../../tool/sort'
 import TxtDetails from './txtDetails'
 import ReplyList from './replyList'
 import './details.css'
@@ -33,13 +34,16 @@ class Details extends Component {
         mdrender: true
       }
       fetchGet(url, params).then(response => response.json()).then(result => {
-        result.success && dispatch({
-          type: 'UPDATE_DETAILS_SUCCESS',
-          payload: {
-            loading: false,
-            data: result.data
-          }
-        })
+        if (result.success) {
+          result.data.replies.sort(compareFn({ propertyName: 'create_at' }))
+          dispatch({
+            type: 'UPDATE_DETAILS_SUCCESS',
+            payload: {
+              loading: false,
+              data: result.data
+            }
+          })
+        }
       }).catch(error => {
         console.warn(error)
         dispatch({

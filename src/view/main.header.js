@@ -8,8 +8,8 @@ class MainHeader extends Component {
     return (
       <Layout.Header>
         <Row>
-          <Col md={6} xs={24} className="logo">cNode</Col>
-          <Col md={18} xs={0}>
+          <Col md={4} xs={24} className="logo">cNode</Col>
+          <Col md={20} xs={0}>
             <Divider type="vertical" className="headerDivider" />
             <Nav mode="horizontal" className="navMenu" />
           </Col>
