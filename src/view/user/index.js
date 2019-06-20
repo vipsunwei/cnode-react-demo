@@ -3,6 +3,7 @@ import { Avatar, Row, Col } from 'antd';
 import { connect } from 'react-redux'
 import UserList from './userList';
 import { fetchGet } from './../../tool/fetch'
+import { compareFn } from '../../tool/sort'
 import { baseUrl, user } from './../../api'
 import './user.css'
 
@@ -29,13 +30,17 @@ class User extends Component {
       })
       let url = baseUrl + user + '/' + id
       fetchGet(url).then(response => response.json()).then(result => {
-        result.success && dispatch({
-          type: 'UPDATE_USER_SUCCESS',
-          payload: {
-            loading: false,
-            data: result.data
-          }
-        })
+        if (result.success) {
+          result.data.recent_topics.sort(compareFn({ propertyName: 'last_reply_at' }))
+          result.data.recent_replies.sort(compareFn({ propertyName: 'last_reply_at' }))
+          dispatch({
+            type: 'UPDATE_USER_SUCCESS',
+            payload: {
+              loading: false,
+              data: result.data
+            }
+          })
+        }
       }).catch(error => {
         console.warn(error)
         dispatch({
@@ -50,9 +55,9 @@ class User extends Component {
   render () {
     let { loading, data } = this.props
     return (
-      <div className='mainWrap'>
-        <Avatar src={data.avatar_url} className='userAvatar' />
-        <Row className='userInfo'>
+      <div className="mainWrap">
+        <Avatar src={ data.avatar_url } className="userAvatar" />
+        <Row className="userInfo">
           <Col md={8}>
             用户名:<span className="userInfoItem">{ data.loginname }</span>
           </Col>
