@@ -5,7 +5,6 @@ import { baseUrl, topic } from './../../api'
 import { compareFn } from './../../tool/sort'
 import TxtDetails from './txtDetails'
 import ReplyList from './replyList'
-import './details.css'
 
 class Details extends Component {
   constructor (props) {

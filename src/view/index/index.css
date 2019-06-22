@@ -19,13 +19,9 @@
 .mainWrap .ant-list-item-meta {
   align-items: center;
   min-width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mainWrap .ant-list-item-meta .ant-list-item-meta-content {
-  white-space: nowrap;
-  overflow: hidden;
+.mainWrap .ant-card-head-title {
+  white-space: normal;
 }
 .mainWrap .ant-menu-item:hover,
 .mainWrap .ant-menu-item-selected {

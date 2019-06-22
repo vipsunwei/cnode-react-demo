@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/vipsunwei/cnode-react-demo"
   },
-  "homepage": "https://github.com/vipsunwei/cnode-react-demo",
+  "homepage": "http://testenv.cn:88/",
   "private": true,
   "sideEffects": [
     "*.css"
