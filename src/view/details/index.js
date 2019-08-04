@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchGet } from './../../tool/fetch'
-import { baseUrl, topic } from './../../api'
-import { compareFn } from './../../tool/sort'
 import TxtDetails from './txtDetails'
 import ReplyList from './replyList'
+import { getTopicDetails } from './../../redux/actions/details-actions'
 
 class Details extends Component {
   constructor (props) {
@@ -21,38 +19,7 @@ class Details extends Component {
     return true
   }
   getData (id) {
-    this.props.dispatch(dispatch => {
-      dispatch({
-        type: 'UPDATE_DETAILS',
-        payload: {
-          loading: true
-        }
-      })
-      let url = baseUrl + topic + '/' + id
-      let params = {
-        mdrender: true
-      }
-      fetchGet(url, params).then(response => response.json()).then(result => {
-        if (result.success) {
-          result.data.replies.sort(compareFn({ propertyName: 'create_at' }))
-          dispatch({
-            type: 'UPDATE_DETAILS_SUCCESS',
-            payload: {
-              loading: false,
-              data: result.data
-            }
-          })
-        }
-      }).catch(error => {
-        console.warn(error)
-        dispatch({
-          type: 'UPDATE_DETAILS_ERROR',
-          payload: {
-            loading: false
-          }
-        })
-      })
-    })
+    this.props.getTopicDetails(id)
   }
   render () {
     let { loading, data } = this.props
@@ -64,4 +31,7 @@ class Details extends Component {
     )
   }
 }
-export default connect(state => state.details)(Details)
+export default connect(
+  state => state.details,
+  { getTopicDetails }
+)(Details)
