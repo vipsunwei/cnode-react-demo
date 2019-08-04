@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { Avatar, Row, Col } from 'antd';
 import { connect } from 'react-redux'
 import UserList from './userList';
-import { fetchGet } from './../../tool/fetch'
-import { compareFn } from '../../tool/sort'
-import { baseUrl, user } from './../../api'
+import { getUserInfo } from './../../redux/actions/user-actions'
 import './user.css'
 
 class User extends Component {
@@ -21,36 +19,7 @@ class User extends Component {
     return true
   }
   getData (id) {
-    this.props.dispatch(updateUser => {
-      updateUser({
-        type: 'UPDATE_USER',
-        payload: {
-          loading: true
-        }
-      })
-      let url = baseUrl + user + '/' + id
-      fetchGet(url).then(response => response.json()).then(result => {
-        if (result.success) {
-          result.data.recent_topics.sort(compareFn({ propertyName: 'last_reply_at' }))
-          result.data.recent_replies.sort(compareFn({ propertyName: 'last_reply_at' }))
-          updateUser({
-            type: 'UPDATE_USER_SUCCESS',
-            payload: {
-              loading: false,
-              data: result.data
-            }
-          })
-        }
-      }).catch(error => {
-        console.warn(error)
-        updateUser({
-          type: 'UPDATE_USER_ERROR',
-          payload: {
-            loading: false
-          }
-        })
-      })
-    })
+    this.props.getUserInfo(id)
   }
   render () {
     let { loading, data } = this.props
@@ -82,4 +51,7 @@ class User extends Component {
     )
   }
 }
-export default connect(state => state.user)(User)
+export default connect(
+  state => state.user,
+  { getUserInfo }
+)(User)

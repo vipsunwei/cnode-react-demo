@@ -6,7 +6,7 @@ class MainFooter extends Component {
   render () {
     return (
       <Layout.Footer className="footer">
-        www.testenv.cn
+        <a href="https://github.com/vipsunwei/cnode-react-demo" target="_blank">github</a>
       </Layout.Footer>
     )
   }
