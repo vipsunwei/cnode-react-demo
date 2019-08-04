@@ -5,6 +5,7 @@ import Book from './../view/book/index'
 import Details from './../view/details/index'
 import About from './../view/about/index'
 import User from './../view/user/index'
+import NotFound from './../view/not-found/not-found'
 
 class RouterIndex extends Component {
   render () {
@@ -18,6 +19,7 @@ class RouterIndex extends Component {
         <Route path="/details/:id" component={ Details } />
         <Route path="/about" component={ About } />
         <Route path="/user/:id" component={ User } />
+        <Route component={ NotFound } />
       </Switch>
     )
   }

@@ -21,8 +21,8 @@ class User extends Component {
     return true
   }
   getData (id) {
-    this.props.dispatch(dispatch => {
-      dispatch({
+    this.props.dispatch(updateUser => {
+      updateUser({
         type: 'UPDATE_USER',
         payload: {
           loading: true
@@ -33,7 +33,7 @@ class User extends Component {
         if (result.success) {
           result.data.recent_topics.sort(compareFn({ propertyName: 'last_reply_at' }))
           result.data.recent_replies.sort(compareFn({ propertyName: 'last_reply_at' }))
-          dispatch({
+          updateUser({
             type: 'UPDATE_USER_SUCCESS',
             payload: {
               loading: false,
@@ -43,7 +43,7 @@ class User extends Component {
         }
       }).catch(error => {
         console.warn(error)
-        dispatch({
+        updateUser({
           type: 'UPDATE_USER_ERROR',
           payload: {
             loading: false

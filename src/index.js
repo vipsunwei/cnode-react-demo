@@ -9,9 +9,10 @@ import { Provider } from 'react-redux'
 import { ConfigProvider, LocaleProvider } from 'antd'
 import zh_CN from 'antd/lib/locale-provider/zh_CN'
 import reducer from './redux/index'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import './index.css'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <BrowserRouter>
