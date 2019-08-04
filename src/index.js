@@ -3,16 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { ConfigProvider, LocaleProvider } from 'antd'
 import zh_CN from 'antd/lib/locale-provider/zh_CN'
-import reducer from './redux/index'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import store from './redux/store/store'
 import './index.css'
-
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <BrowserRouter>

@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import { List, Skeleton, Avatar } from 'antd'
 import TxtTag from './../txtTag'
 import { connect } from 'react-redux'
-import { fetchGet } from './../../tool/fetch'
-import { compareFn } from './../../tool/sort'
-import { baseUrl, topics } from './../../api'
+import { getTopicList } from './../../redux/actions/list-actions'
 
 class IndexList extends Component {
   constructor (props) {
@@ -26,36 +24,7 @@ class IndexList extends Component {
     return true
   }
   getData (tab) {
-    let params = {
-      tab,
-      mdrender: true
-    }
-    let url = baseUrl + topics
-    this.props.dispatch(dispatch => {
-      dispatch({
-        type: 'UPDATE_LIST',
-        payload: {
-          loading: true
-        }
-      })
-      fetchGet(url, params).then(response => response.json()).then(result => {
-        result.success && dispatch({
-          type: 'UPDATE_LIST_SUCCESS',
-          payload: {
-            data: result.data.sort(compareFn({ priority: 'top', propertyName: 'create_at' })),
-            loading: false
-          }
-        })
-      }).catch(error => {
-        console.warn(error)
-        dispatch({
-          type: 'UPDATE_LIST_ERROR',
-          payload: {
-            loading: false
-          }
-        })
-      })
-    })
+    this.props.getTopicList(tab)
   }
   render () {
     let { data, loading } = this.props
@@ -107,4 +76,7 @@ class IndexList extends Component {
   }
 }
 
-export default connect(state => state.list)(IndexList)
+export default connect(
+  state => state.list,
+  { getTopicList }
+)(IndexList)
