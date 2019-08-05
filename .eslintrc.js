@@ -1,21 +1,33 @@
 module.exports = {
   root: true,
   parser: 'babel-eslint',
+  extends: [
+    'standard',
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   parserOptions: {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "arrowFunctions": true,
+      "classes": true,
+      "modules": true,
+      "defaultParams": true
+    },
     sourceType: 'module'
   },
   env: {
     browser: true,
-    node: true
+    node: true,
+    es6: true,
+    commonjs: true
   },
-  extends: 'standard',
   globals: {
     __static: true,
-    React: true,
-    _: true,
-    $: true
   },
   plugins: [
+    'react',
     'html'
   ],
   'rules': {
@@ -32,6 +44,8 @@ module.exports = {
     // 关闭检查全等于
     // 'eqeqeq': 0,
     // 关闭检查eval
-    'no-eval': 0
+    'no-eval': 0,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }
