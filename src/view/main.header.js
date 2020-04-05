@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Divider, Dropdown, Icon, Button } from 'antd'
+import { Layout, Row, Col, Divider, Dropdown, Button } from 'antd'
+import { BarsOutlined } from '@ant-design/icons'
 import Nav from './nav'
 import './main.header.css'
 
@@ -15,7 +16,7 @@ class MainHeader extends Component {
           </Col>
           <Col md={0} xs={24} className="xsNavMenu">
             <Dropdown overlay={ <Nav mode="vertical" className="xsNavMenu" /> } trigger={ ['hover', 'click'] } placement="bottomRight" >
-              <Button><Icon type="bars" /></Button>
+              <Button><BarsOutlined /></Button>
             </Dropdown>
           </Col>
         </Row>

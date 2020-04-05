@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { List, Skeleton, Avatar } from 'antd'
+import PropTypes from 'prop-types';
 import TxtTag from './../txtTag'
 import { connect } from 'react-redux'
 import { getTopicList } from './../../redux/actions/list-actions'
 
 class IndexList extends Component {
+  static propTypes = {
+    tab: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    getTopicList: PropTypes.func.isRequired
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -13,6 +21,7 @@ class IndexList extends Component {
     }
     this.getData(this.props.tab)
   }
+
   shouldComponentUpdate (nextProps) {
     if (nextProps.tab !== this.props.tab) {
       this.getData(nextProps.tab)
@@ -23,12 +32,14 @@ class IndexList extends Component {
     }
     return true
   }
+
   getData (tab) {
     this.props.getTopicList(tab)
   }
+
   render () {
-    let { data, loading } = this.props
-    let pagination = !loading ? {
+    const { data, loading } = this.props
+    const pagination = !loading ? {
       hideOnSinglePage: true,
       current: this.state.current,
       pageSize: 9,

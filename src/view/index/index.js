@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd';
+import PropTypes from 'prop-types'
 import IndexMenu from './indexMenu'
 import IndexList from './indexList'
 import './index.css'
 
 class Index extends Component {
+  static propTypes = {
+    loading: PropTypes.bool,
+    match: PropTypes.object.isRequired
+  }
+
   render () {
-    let tab = this.props.match.params.id
+    const tab = this.props.match.params.id
     return (
       <Row className="mainWrap">
         <Col md={4} xs={0}>

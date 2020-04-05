@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { List, Card, Avatar } from 'antd';
+import PropTypes from 'prop-types'
 
 class ReplyList extends Component {
+  static propTypes = {
+    loading: PropTypes.bool,
+    replies: PropTypes.array,
+    replyCount: PropTypes.number
+  }
+
   constructor (props) {
     super(props)
     this.state = {
       current: 1
     }
   }
+
   render () {
-    let { loading, replies, replyCount } = this.props
-    let title = !replyCount || loading ? '' : `${replyCount}条回复`
-    let pagination = {
+    const { loading, replies, replyCount } = this.props
+    const title = !replyCount || loading ? '' : `${replyCount}条回复`
+    const pagination = {
       defaultCurrent: 1,
       current: this.state.current,
       pageSize: 3,
